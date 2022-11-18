@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1065509707622",
+    "project_id": "tutoring-app-368813",
+    "storage_bucket": "tutoring-app-368813.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1065509707622:android:8826e7d3e3f6fc1edf72a7",
+        "android_client_info": {
+          "package_name": "host.exp.exponent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1065509707622-950ibdm1neu17oa62qbmuhe3hu3jedvf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-4HelQegWkv4rwMeLnpXORhiZFRF5DpU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1065509707622-950ibdm1neu17oa62qbmuhe3hu3jedvf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1065509707622-if2l6qnaae04tr1enuc6hriq0u2tjmt5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "host.exp.exponent"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
