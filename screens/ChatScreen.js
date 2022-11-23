@@ -1,15 +1,12 @@
-import { View, Text, Button } from "react-native";
+import { SafeAreaView, Text, Button } from "react-native";
 import React from "react";
-import useAuth from "../hooks/useAuth";
+import Header from "../components/Header";
 
 const ChatScreen = () => {
-  const { logout, loading, user } = useAuth();
-
   return (
-    <View>
-      <Text>I am the Chat Screen</Text>
-      <Button title="Sign Out" onPress={() => logout()} disabled={loading} />
-    </View>
+    <SafeAreaView>
+      <Header title={"Chat"} callEnabled={true} />
+    </SafeAreaView>
   );
 };
 
