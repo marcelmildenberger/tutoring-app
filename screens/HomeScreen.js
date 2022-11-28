@@ -114,7 +114,10 @@ const HomeScreen = () => {
             userSwiped,
           });
         } else {
-          //user has swiped as first of two or didnt get swiped on
+          setDoc(
+            doc(db, "users", user.uid, "swipes", userSwiped.id),
+            userSwiped
+          );
         }
       }
     );
