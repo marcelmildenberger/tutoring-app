@@ -33,11 +33,18 @@ const HomeScreen = () => {
   const tw = useTailwind();
 
   useLayoutEffect(() => {
-    return onSnapshot(doc(db, "users", user.uid), (snapshot) => {
-      if (!snapshot.exists()) {
+    console.log(process.env.REACT_APP_API_URL);
+    const fetchUser = async () => {
+      const fetchResponse = await fetch(
+        `${process.env.REACT_APP_API_URL}/getUser/70Rd7OdHEgSPXTT8IOr5rxASRs43`
+      );
+      const userData = await fetchResponse.json();
+      console.log(userData);
+      if (fetchResponse.status !== 200 && !userData?.user) {
         navigation.navigate("Modal");
       }
-    });
+    };
+    fetchUser();
   }, []);
 
   useEffect(() => {
