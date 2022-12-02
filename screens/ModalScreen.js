@@ -7,12 +7,11 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { setDoc, doc, serverTimestamp } from "@firebase/firestore";
 import React, { useState } from "react";
 import { useTailwind } from "tailwind-rn/dist";
 import useAuth from "../hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
-import { db } from "../firebase";
+import { REACT_APP_API_URL } from "@env";
 
 const ModalScreen = () => {
   const tw = useTailwind();
@@ -25,20 +24,33 @@ const ModalScreen = () => {
   const incompleteForm = !image || !age || !job;
 
   const updateUserProfile = () => {
-    setDoc(doc(db, "users", user.uid), {
-      id: user.uid,
-      displayName: user.displayName,
-      photoURL: image,
-      job: job,
-      age: age,
-      timestamp: serverTimestamp(),
-    })
+    const response = fetch(
+      `${REACT_APP_API_URL}/updateUserProfile/${user.uid}`,
+      {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify({
+          data: {
+            id: user.uid,
+            displayName: user.displayName,
+            photoURL: image,
+            job: job,
+            age: age,
+          },
+        }),
+      }
+    )
       .then(() => {
         navigation.navigate("Home");
       })
-      .catch((error) => {
-        alert(error.message);
-      });
+      .catch((error) => alert(error));
   };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>

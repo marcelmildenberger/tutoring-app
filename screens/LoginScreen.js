@@ -1,5 +1,5 @@
 import { View, ImageBackground, Text, TouchableOpacity } from "react-native";
-import React, { useLayoutEffect } from "react";
+import React from "react";
 import useAuth from "../hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
 import { useTailwind } from "tailwind-rn";

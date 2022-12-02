@@ -12,19 +12,7 @@ import useAuth from "../hooks/useAuth";
 import { useTailwind } from "tailwind-rn";
 import { AntDesign, Entypo, Ionicons } from "@expo/vector-icons";
 import Swiper from "react-native-deck-swiper";
-import {
-  collection,
-  doc,
-  onSnapshot,
-  query,
-  setDoc,
-  where,
-  getDocs,
-  getDoc,
-  serverTimestamp,
-} from "firebase/firestore";
-import { db } from "../firebase";
-import generateId from "../lib/generateId";
+import { REACT_APP_API_URL } from "@env";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -33,14 +21,12 @@ const HomeScreen = () => {
   const tw = useTailwind();
 
   useLayoutEffect(() => {
-    console.log(process.env.REACT_APP_API_URL);
     const fetchUser = async () => {
       const fetchResponse = await fetch(
-        `${process.env.REACT_APP_API_URL}/getUser/70Rd7OdHEgSPXTT8IOr5rxASRs43`
+        `${REACT_APP_API_URL}/getUser/${user.uid}`
       );
       const userData = await fetchResponse.json();
-      console.log(userData);
-      if (fetchResponse.status !== 200 && !userData?.user) {
+      if (fetchResponse.status !== 200 && !userData?.data?.user) {
         navigation.navigate("Modal");
       }
     };
@@ -48,88 +34,58 @@ const HomeScreen = () => {
   }, []);
 
   useEffect(() => {
-    let unsub;
-
     const fetchCards = async () => {
-      const passes = await getDocs(collection(db, "users", user.uid, "passes"));
-      const swipes = await getDocs(collection(db, "users", user.uid, "swipes"));
-
-      const passesIds = passes.docs.map((doc) => doc.id);
-      const swipeIds = swipes.docs.map((doc) => doc.id);
-
-      const swipedUserIds = swipeIds.length > 0 ? swipeIds : ["test"];
-      const passedUserIds = passesIds.length > 0 ? passesIds : ["test"];
-      unsub = onSnapshot(
-        query(
-          collection(db, "users"),
-          where("id", "not-in", [...passedUserIds, ...swipedUserIds])
-        ),
-        (snapshot) => {
-          setProfiles(
-            snapshot.docs
-              .filter((doc) => doc.id != user.uid)
-              .map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-              }))
-          );
-        }
+      const fetchProfiles = await fetch(
+        `${REACT_APP_API_URL}/getProfiles/${user.uid}`
       );
+      const fetchProfilesData = await fetchProfiles.json();
+      setProfiles(fetchProfilesData);
     };
     fetchCards();
-    return unsub;
-  }, [db]);
+  }, []);
 
   const swipeRef = useRef(null);
 
-  const swipeLeft = (cardIndex) => {
+  const swipeLeft = async (cardIndex) => {
     if (!profiles[cardIndex]) return;
     const userSwiped = profiles[cardIndex];
-    setDoc(doc(db, "users", user.uid, "passes", userSwiped.id), userSwiped);
+    const response = fetch(`${REACT_APP_API_URL}/pass/${user.uid}`, {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify({ userSwiped: userSwiped }),
+    });
   };
 
   const swipeRight = async (cardIndex) => {
     if (!profiles[cardIndex]) return;
     const userSwiped = profiles[cardIndex];
-    const loggedInProfile = await (
-      await getDoc(doc(db, "users", user.uid))
-    ).data();
-
-    //chec if user swiped on you
-
-    await getDoc(doc(db, "users", userSwiped.id, "swipes", user.uid)).then(
-      (documentSnapshot) => {
-        if (documentSnapshot.exists()) {
-          //user has matched with you before you matched them...
-
-          setDoc(
-            doc(db, "users", user.uid, "swipes", userSwiped.id),
-            userSwiped
-          );
-          // create a MATCH
-          console.log("MATCH");
-          setDoc(doc(db, "matches", generateId(user.uid, userSwiped.id)), {
-            users: {
-              [user.uid]: loggedInProfile,
-              [userSwiped.id]: userSwiped,
-            },
-            usersMatched: [user.uid, userSwiped.id],
-            timestamp: serverTimestamp(),
-          });
-          navigation.navigate("Match", {
-            loggedInProfile,
-            userSwiped,
-          });
-        } else {
-          setDoc(
-            doc(db, "users", user.uid, "swipes", userSwiped.id),
-            userSwiped
-          );
-        }
-      }
-    );
-
-    setDoc(doc(db, "users", user.uid, "swipes", userSwiped.id), userSwiped);
+    const response = await fetch(`${REACT_APP_API_URL}/swipe/${user.uid}`, {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify({ userSwiped: userSwiped }),
+    });
+    const data = await response.json();
+    if (response.status === 200 && data?.match) {
+      const loggedInProfile = data?.loggedInProfile;
+      navigation.navigate("Match", {
+        loggedInProfile,
+        userSwiped,
+      });
+    }
   };
 
   return (
