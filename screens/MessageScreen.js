@@ -101,7 +101,7 @@ const MessageScreen = () => {
             value={input}
             onSubmitEditing={sendMessage}
           />
-          <Button title="Send" color="#FF5864" onPress={sendMessage} />
+          <Button title="Send" color="#ff8836" onPress={sendMessage} />
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>

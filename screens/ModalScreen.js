@@ -65,7 +65,7 @@ const ModalScreen = () => {
           Welcome {user.displayName}
         </Text>
 
-        <Text style={tw("text-center p-4 font-bold text-red-400")}>
+        <Text style={tw("text-center p-4 font-bold text-[#ff8836]")}>
           Step 1: The Profile Pic
         </Text>
         <TextInput
@@ -75,7 +75,7 @@ const ModalScreen = () => {
           placeholder="Enter a Profile Pic URL"
         />
 
-        <Text style={tw("text-center p-4 font-bold text-red-400")}>
+        <Text style={tw("text-center p-4 font-bold text-[#ff8836]")}>
           Step 2: The Job
         </Text>
         <TextInput
@@ -85,7 +85,7 @@ const ModalScreen = () => {
           placeholder="Enter your occupation"
         />
 
-        <Text style={tw("text-center p-4 font-bold text-red-400")}>
+        <Text style={tw("text-center p-4 font-bold text-[#ff8836]")}>
           Step 3: The Age
         </Text>
         <TextInput
@@ -100,7 +100,7 @@ const ModalScreen = () => {
           disabled={incompleteForm}
           style={[
             tw("w-64 p-3 rounded-xl absolute bottom-10 "),
-            incompleteForm ? tw("bg-gray-400") : tw("bg-red-400"),
+            incompleteForm ? tw("bg-gray-400") : tw("bg-[#ff8836]"),
           ]}
           onPress={updateUserProfile}
         >

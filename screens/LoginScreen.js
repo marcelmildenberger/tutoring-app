@@ -14,7 +14,7 @@ const LoginScreen = () => {
       <ImageBackground
         resizeMode="cover"
         style={tw("flex-1")}
-        source={{ uri: "https://tinder.com/static/tinder.png" }}
+        source={require("../images/Logo-Sucseed.png")}
       >
         <TouchableOpacity
           onPress={signInWithGoogle}

@@ -102,11 +102,11 @@ const HomeScreen = () => {
           <Image
             style={tw("h-14 w-14")}
             resizeMode="contain"
-            source={require("../images/pngfind.com-tinder-logo-png-131073.png")}
+            source={require("../images/LogoKlein-Sucseed.png")}
           />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate("Chat")}>
-          <Ionicons name="chatbubbles-sharp" size={30} color="#FF5864" />
+          <Ionicons name="chatbubbles-sharp" size={30} color="#ff8836" />
         </TouchableOpacity>
       </View>
 
@@ -141,7 +141,7 @@ const HomeScreen = () => {
               title: "MATCH",
               style: {
                 label: {
-                  color: "#4DED30",
+                  color: "#ff8836",
                 },
               },
             },
@@ -207,10 +207,10 @@ const HomeScreen = () => {
         <TouchableOpacity
           onPress={() => swipeRef.current.swipeRight()}
           style={tw(
-            "items-center justify-center rounded-full w-16 h-16 bg-green-200"
+            "items-center justify-center rounded-full w-16 h-16 bg-[#ffb683]"
           )}
         >
-          <AntDesign name="heart" size={24} color="green" />
+          <AntDesign name="check" size={24} color="#c45200" />
         </TouchableOpacity>
       </View>
     </SafeAreaView>
