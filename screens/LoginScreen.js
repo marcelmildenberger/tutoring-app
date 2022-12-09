@@ -23,9 +23,7 @@ const LoginScreen = () => {
             { marginHorizontal: "25%" },
           ]}
         >
-          <Text style={tw("font-semibold text-center")}>
-            Sign in & get swiping
-          </Text>
+          <Text style={tw("font-semibold text-center")}>Log In & Sucseed</Text>
         </TouchableOpacity>
       </ImageBackground>
     </View>
