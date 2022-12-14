@@ -18,8 +18,9 @@ const ModalScreen = () => {
   const { user } = useAuth();
   const navigation = useNavigation();
   const [image, setImage] = useState(null);
-  const [job, setJob] = useState(null);
+  const [skills, setSkills] = useState(null);
   const [age, setAge] = useState(null);
+  const [biography, setBiography] = useState(null);
 
   const incompleteForm = !image || !age || !job;
 
@@ -76,24 +77,34 @@ const ModalScreen = () => {
         />
 
         <Text style={tw("text-center p-4 font-bold text-[#ff8836]")}>
-          Step 2: The Job
+          Step 2: The Age
         </Text>
         <TextInput
-          value={job}
-          onChangeText={(text) => setJob(text)}
-          style={tw("text-center text-xl pb-2")}
-          placeholder="Enter your occupation"
-        />
-
-        <Text style={tw("text-center p-4 font-bold text-[#ff8836]")}>
-          Step 3: The Age
-        </Text>
-        <TextInput
-          keyboardType="numeric"
           value={age}
+          keyboardType="numeric"
           onChangeText={(text) => setAge(text)}
           style={tw("text-center text-xl pb-2")}
           placeholder="Enter your age"
+        />
+
+        <Text style={tw("text-center p-4 font-bold text-[#ff8836]")}>
+          Step 3: Put your Skills
+        </Text>
+        <TextInput
+          value={skills}
+          onChangeText={(text) => setSkills(text)}
+          style={tw("text-center text-xl pb-2")}
+          placeholder="Tell others what you want to teach"
+        />
+
+        <Text style={tw("text-center p-4 font-bold text-[#ff8836]")}>
+          Step 4: Biography
+        </Text>
+        <TextInput
+          value={biography}
+          onChangeText={(text) => setBiography(text)}
+          style={tw("text-center text-xl pb-2")}
+          placeholder="What others should also know about you"
         />
 
         <TouchableOpacity
