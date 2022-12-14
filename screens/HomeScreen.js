@@ -102,7 +102,7 @@ const HomeScreen = () => {
           <Image
             style={tw("h-14 w-14")}
             resizeMode="contain"
-            source={require("../images/LogoKlein-Sucseed.png")}
+            source={require("../images/LogoKlein_Sucseed.png")}
           />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate("Chat")}>
