@@ -58,7 +58,7 @@ const ModalScreen = () => {
         <Image
           style={tw("h-20 w-full")}
           resizeMode="contain"
-          source={{ uri: "https://links.papareact.com/2pf" }}
+          source={require("../images/Logo_Profil.png")}
         />
 
         <Text style={tw("text-xl text-gray-500 p-2 font-bold")}>

@@ -25,7 +25,7 @@ const MatchScreen = () => {
         <View style={tw("justify-center px-10 pt-20")}>
           <Image
             style={tw("h-20 w-full")}
-            source={{ uri: "https://links.papareact.com/mg9" }}
+            source={require("../images/Match_Screen.png")}
           />
         </View>
         <Text style={tw("text-black text-center mt-5 text-lg")}>
