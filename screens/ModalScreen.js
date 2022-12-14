@@ -18,11 +18,13 @@ const ModalScreen = () => {
   const { user } = useAuth();
   const navigation = useNavigation();
   const [image, setImage] = useState(null);
-  const [skills, setSkills] = useState(null);
+  const [skills, setSkills] = useState([]);
   const [age, setAge] = useState(null);
   const [biography, setBiography] = useState(null);
+  const [phoneNumber, setPhoneNumber] = useState(null);
 
-  const incompleteForm = !image || !age || !job;
+  const incompleteForm =
+    !image || !age || !biography || !phoneNumber || !skills;
 
   const updateUserProfile = () => {
     const response = fetch(
@@ -42,8 +44,10 @@ const ModalScreen = () => {
             id: user.uid,
             displayName: user.displayName,
             photoURL: image,
-            job: job,
+            biography: biography,
+            skills: skills,
             age: age,
+            phoneNumber: phoneNumber,
           },
         }),
       }
@@ -90,12 +94,12 @@ const ModalScreen = () => {
         <Text style={tw("text-center p-4 font-bold text-[#ff8836]")}>
           Step 3: Put your Skills
         </Text>
-        <TextInput
+        {/*<TextInput
           value={skills}
           onChangeText={(text) => setSkills(text)}
           style={tw("text-center text-xl pb-2")}
           placeholder="Tell others what you want to teach"
-        />
+        /> */}
 
         <Text style={tw("text-center p-4 font-bold text-[#ff8836]")}>
           Step 4: Biography
@@ -105,6 +109,17 @@ const ModalScreen = () => {
           onChangeText={(text) => setBiography(text)}
           style={tw("text-center text-xl pb-2")}
           placeholder="What others should also know about you"
+        />
+
+        <Text style={tw("text-center p-4 font-bold text-[#ff8836]")}>
+          Step 5: Phone Number
+        </Text>
+        <TextInput
+          value={phoneNumber}
+          keyboardType="phone-pad"
+          onChangeText={(text) => setPhoneNumber(text)}
+          style={tw("text-center text-xl pb-2")}
+          placeholder="How can people contact you"
         />
 
         <TouchableOpacity

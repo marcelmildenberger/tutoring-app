@@ -168,7 +168,7 @@ const HomeScreen = () => {
                     <Text style={tw("text-xl font-bold")}>
                       {card.displayName}
                     </Text>
-                    <Text>{card.occupation}</Text>
+                    <Text>{card.skills}</Text>
                   </View>
                   <Text style={tw("text-2xl font-bold")}>{card.age}</Text>
                 </View>

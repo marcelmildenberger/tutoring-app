@@ -4,8 +4,9 @@ import { useTailwind } from "tailwind-rn";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { Foundation } from "@expo/vector-icons";
+import { Linking } from "react-native";
 
-const Header = ({ title, callEnabled }) => {
+const Header = ({ title, callEnabled, phoneNumber }) => {
   const tw = useTailwind();
   const navigation = useNavigation();
   return (
@@ -19,6 +20,7 @@ const Header = ({ title, callEnabled }) => {
 
       {callEnabled && (
         <TouchableOpacity
+          onPress={() => Linking.openURL(`tel:${phoneNumber}`)}
           style={tw(
             "rounded-full mr-4 p-3 bg-[#ff8836] h-10 w-10 flex flex-row items-center"
           )}

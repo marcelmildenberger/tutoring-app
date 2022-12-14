@@ -67,6 +67,9 @@ const MessageScreen = () => {
       <Header
         title={getMatchedUserInfo(matchDetails?.users, user.uid).displayName}
         callEnabled={true}
+        phoneNumber={
+          getMatchedUserInfo(matchDetails?.users, user.uid).phoneNumber
+        }
       />
 
       <KeyboardAvoidingView
