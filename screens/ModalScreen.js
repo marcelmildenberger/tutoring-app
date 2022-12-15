@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTailwind } from "tailwind-rn/dist";
 import useAuth from "../hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
@@ -27,6 +27,16 @@ const ModalScreen = () => {
   const incompleteForm =
     !image || !age || !biography || !phoneNumber || !skills;
 
+  const userProfileInfo = async () => {
+    const response = await fetch(`${REACT_APP_API_URL}/getUser/${user.uid}`);
+    if (response.status === 500) return;
+    const data = await response.json();
+    setImage(data.data.photoURL);
+    setSkills(data.data.skills);
+    setAge(data.data.age);
+    setBiography(data.data.biography);
+    setPhoneNumber(data.data.phoneNumber);
+  };
   const updateUserProfile = () => {
     const response = fetch(
       `${REACT_APP_API_URL}/updateUserProfile/${user.uid}`,
@@ -58,6 +68,9 @@ const ModalScreen = () => {
       })
       .catch((error) => alert(error));
   };
+  useEffect(() => {
+    userProfileInfo();
+  }, []);
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={tw("flex-1 items-center pt-1")}>

@@ -26,12 +26,12 @@
   bottom: 2.5rem
 }
 
-.m-5 {
-  margin: 1.25rem
-}
-
 .m-1 {
   margin: 0.25rem
+}
+
+.m-5 {
+  margin: 1.25rem
 }
 
 .mx-3 {
@@ -57,6 +57,10 @@
   margin-left: 3.5rem
 }
 
+.ml-1 {
+  margin-left: 0.25rem
+}
+
 .-mt-6 {
   margin-top: -1.5rem
 }
@@ -73,8 +77,12 @@
   margin-left: 0.5rem
 }
 
-.ml-1 {
-  margin-left: 0.25rem
+.mt-3 {
+  margin-top: 0.75rem
+}
+
+.mt-2 {
+  margin-top: 0.5rem
 }
 
 .inline-block {
@@ -83,10 +91,6 @@
 
 .flex {
   display: flex
-}
-
-.inline-flex {
-  display: inline-flex
 }
 
 .h-full {
@@ -113,12 +117,20 @@
   height: 75%
 }
 
+.h-80 {
+  height: 20rem
+}
+
 .h-20 {
   height: 5rem
 }
 
 .h-32 {
   height: 8rem
+}
+
+.h-24 {
+  height: 6rem
 }
 
 .w-16 {
@@ -153,6 +165,14 @@
   width: 16rem
 }
 
+.w-4 {
+  width: 1rem
+}
+
+.w-1\/4 {
+  width: 25%
+}
+
 .flex-1 {
   flex: 1 1 0%
 }
@@ -179,6 +199,10 @@
 
 .justify-evenly {
   justify-content: space-evenly
+}
+
+.overflow-hidden {
+  overflow: hidden
 }
 
 .rounded-lg {
@@ -308,6 +332,10 @@
   padding-left: 0.5rem
 }
 
+.pr-1 {
+  padding-right: 0.25rem
+}
+
 .pb-5 {
   padding-bottom: 1.25rem
 }
@@ -328,16 +356,32 @@
   padding-bottom: 0.5rem
 }
 
-.pl-1 {
-  padding-left: 0.25rem
+.pl-20 {
+  padding-left: 5rem
 }
 
-.pr-1 {
-  padding-right: 0.25rem
+.pl-5 {
+  padding-left: 1.25rem
+}
+
+.pt-4 {
+  padding-top: 1rem
+}
+
+.pt-5 {
+  padding-top: 1.25rem
+}
+
+.text-left {
+  text-align: left
 }
 
 .text-center {
   text-align: center
+}
+
+.text-right {
+  text-align: right
 }
 
 .text-lg {

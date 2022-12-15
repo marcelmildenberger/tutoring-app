@@ -159,18 +159,41 @@ const HomeScreen = () => {
                 <View
                   style={[
                     tw(
-                      "bg-white w-full h-20 absolute bottom-0 justify-between flex-row px-6 py-2 rounded-b-lg items-center"
+                      "bg-white w-full absolute bottom-0 flex-col px-6 py-2 rounded-b-lg "
                     ),
                     styles.cardShadow,
                   ]}
                 >
-                  <View>
+                  <View style={tw("flex-row justify-between ")}>
                     <Text style={tw("text-xl font-bold")}>
                       {card.displayName}
                     </Text>
-                    <Text>{card.skills}</Text>
+                    <Text style={tw("text-2xl font-bold")}>{card.age}</Text>
                   </View>
-                  <Text style={tw("text-2xl font-bold")}>{card.age}</Text>
+
+                  <View
+                    style={[
+                      tw("mt-2 flex-row justify-between"),
+                      { flexShrink: 1 },
+                    ]}
+                  >
+                    <View>
+                      <Text>I can teach you:</Text>
+                      <View>
+                        {card.skills.map((item, index) => (
+                          <Text key={index}>{`👉 ${item}`}</Text>
+                        ))}
+                      </View>
+                    </View>
+                    <Text
+                      style={[
+                        tw("text-right pl-5"),
+                        { flex: 1, flexWrap: "wrap" },
+                      ]}
+                    >
+                      {card.biography}
+                    </Text>
+                  </View>
                 </View>
               </View>
             ) : (

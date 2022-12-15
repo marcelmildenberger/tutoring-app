@@ -34,20 +34,20 @@
 			"bottom": 40
 		}
 	},
-	"m-5": {
-		"style": {
-			"marginTop": 20,
-			"marginRight": 20,
-			"marginBottom": 20,
-			"marginLeft": 20
-		}
-	},
 	"m-1": {
 		"style": {
 			"marginTop": 4,
 			"marginRight": 4,
 			"marginBottom": 4,
 			"marginLeft": 4
+		}
+	},
+	"m-5": {
+		"style": {
+			"marginTop": 20,
+			"marginRight": 20,
+			"marginBottom": 20,
+			"marginLeft": 20
 		}
 	},
 	"mx-3": {
@@ -78,6 +78,11 @@
 			"marginLeft": 56
 		}
 	},
+	"ml-1": {
+		"style": {
+			"marginLeft": 4
+		}
+	},
 	"-mt-6": {
 		"style": {
 			"marginTop": -24
@@ -98,9 +103,14 @@
 			"marginLeft": 8
 		}
 	},
-	"ml-1": {
+	"mt-3": {
 		"style": {
-			"marginLeft": 4
+			"marginTop": 12
+		}
+	},
+	"mt-2": {
+		"style": {
+			"marginTop": 8
 		}
 	},
 	"inline-block": {
@@ -111,11 +121,6 @@
 	"flex": {
 		"style": {
 			"display": "flex"
-		}
-	},
-	"inline-flex": {
-		"style": {
-			"display": "inline-flex"
 		}
 	},
 	"h-full": {
@@ -148,6 +153,11 @@
 			"height": "75%"
 		}
 	},
+	"h-80": {
+		"style": {
+			"height": 320
+		}
+	},
 	"h-20": {
 		"style": {
 			"height": 80
@@ -156,6 +166,11 @@
 	"h-32": {
 		"style": {
 			"height": 128
+		}
+	},
+	"h-24": {
+		"style": {
+			"height": 96
 		}
 	},
 	"w-16": {
@@ -198,6 +213,16 @@
 			"width": 256
 		}
 	},
+	"w-4": {
+		"style": {
+			"width": 16
+		}
+	},
+	"w-1/4": {
+		"style": {
+			"width": "25%"
+		}
+	},
 	"flex-1": {
 		"style": {
 			"flexGrow": 1,
@@ -233,6 +258,11 @@
 	"justify-evenly": {
 		"style": {
 			"justifyContent": "space-evenly"
+		}
+	},
+	"overflow-hidden": {
+		"style": {
+			"overflow": "hidden"
 		}
 	},
 	"rounded-lg": {
@@ -420,6 +450,11 @@
 			"paddingLeft": 8
 		}
 	},
+	"pr-1": {
+		"style": {
+			"paddingRight": 4
+		}
+	},
 	"pb-5": {
 		"style": {
 			"paddingBottom": 20
@@ -445,19 +480,39 @@
 			"paddingBottom": 8
 		}
 	},
-	"pl-1": {
+	"pl-20": {
 		"style": {
-			"paddingLeft": 4
+			"paddingLeft": 80
 		}
 	},
-	"pr-1": {
+	"pl-5": {
 		"style": {
-			"paddingRight": 4
+			"paddingLeft": 20
+		}
+	},
+	"pt-4": {
+		"style": {
+			"paddingTop": 16
+		}
+	},
+	"pt-5": {
+		"style": {
+			"paddingTop": 20
+		}
+	},
+	"text-left": {
+		"style": {
+			"textAlign": "left"
 		}
 	},
 	"text-center": {
 		"style": {
 			"textAlign": "center"
+		}
+	},
+	"text-right": {
+		"style": {
+			"textAlign": "right"
 		}
 	},
 	"text-lg": {

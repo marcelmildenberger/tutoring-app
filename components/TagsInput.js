@@ -12,6 +12,11 @@ const TagsInput = ({ tags, setTags }) => {
   const [text, setText] = useState("");
   const tw = useTailwind();
   const handleEnter = (e) => {
+    if (e.nativeEvent.key === "Backspace") {
+      setText((prev) => prev.slice(0, prev.length - 1));
+      return;
+    }
+
     if (!(e.nativeEvent.key === ",")) {
       setText((prev) => `${prev}${e.nativeEvent.key}`);
       return;
