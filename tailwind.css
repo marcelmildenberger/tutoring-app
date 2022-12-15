@@ -30,6 +30,10 @@
   margin: 1.25rem
 }
 
+.m-1 {
+  margin: 0.25rem
+}
+
 .mx-3 {
   margin-left: 0.75rem;
   margin-right: 0.75rem
@@ -65,8 +69,24 @@
   margin-top: 5rem
 }
 
+.ml-2 {
+  margin-left: 0.5rem
+}
+
+.ml-1 {
+  margin-left: 0.25rem
+}
+
+.inline-block {
+  display: inline-block
+}
+
 .flex {
   display: flex
+}
+
+.inline-flex {
+  display: inline-flex
 }
 
 .h-full {
@@ -141,6 +161,10 @@
   flex-direction: row
 }
 
+.flex-col {
+  flex-direction: column
+}
+
 .items-center {
   align-items: center
 }
@@ -184,6 +208,10 @@
 
 .rounded-tr-none {
   border-top-right-radius: 0px
+}
+
+.border {
+  border-width: 1px
 }
 
 .border-t {
@@ -298,6 +326,14 @@
 
 .pb-2 {
   padding-bottom: 0.5rem
+}
+
+.pl-1 {
+  padding-left: 0.25rem
+}
+
+.pr-1 {
+  padding-right: 0.25rem
 }
 
 .text-center {

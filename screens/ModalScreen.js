@@ -12,6 +12,7 @@ import { useTailwind } from "tailwind-rn/dist";
 import useAuth from "../hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
 import { REACT_APP_API_URL } from "@env";
+import TagsInput from "../components/TagsInput";
 
 const ModalScreen = () => {
   const tw = useTailwind();
@@ -94,12 +95,7 @@ const ModalScreen = () => {
         <Text style={tw("text-center p-4 font-bold text-[#ff8836]")}>
           Step 3: Put your Skills
         </Text>
-        {/*<TextInput
-          value={skills}
-          onChangeText={(text) => setSkills(text)}
-          style={tw("text-center text-xl pb-2")}
-          placeholder="Tell others what you want to teach"
-        /> */}
+        <TagsInput tags={skills} setTags={setSkills} />
 
         <Text style={tw("text-center p-4 font-bold text-[#ff8836]")}>
           Step 4: Biography
