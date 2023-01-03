@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   FlatList,
+  TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
@@ -26,6 +27,8 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../firebase";
+import { Entypo } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const MessageScreen = () => {
   const { user } = useAuth();
@@ -34,6 +37,7 @@ const MessageScreen = () => {
   const { matchDetails } = params;
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
+  const navigation = useNavigation();
   useEffect(
     () =>
       onSnapshot(
@@ -98,13 +102,16 @@ const MessageScreen = () => {
           )}
         >
           <TextInput
-            style={tw("h-10 text-lg")}
+            style={tw("h-10 text-lg pr-10")}
             placeholder="Send Message..."
             onChangeText={setInput}
             value={input}
             onSubmitEditing={sendMessage}
           />
           <Button title="Send" color="#ff8836" onPress={sendMessage} />
+          <TouchableOpacity onPress={() => navigation.navigate("Calender")}>
+            <Entypo name="calendar" size={24} color="#ff8836" />
+          </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
