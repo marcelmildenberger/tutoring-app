@@ -3,15 +3,11 @@ import React, { useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
 import { useTailwind } from "tailwind-rn";
-import Geolocation from "@react-native-community/geolocation";
 
 const LoginScreen = () => {
   const { signInWithGoogle, loading } = useAuth();
   const navigation = useNavigation();
   const tw = useTailwind();
-  useEffect(() => {
-    Geolocation.getCurrentPosition((info) => console.log(info));
-  }, []);
   return (
     <View style={tw("flex-1")}>
       <ImageBackground

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  Button,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useTailwind } from "tailwind-rn/dist";
@@ -13,6 +14,7 @@ import useAuth from "../hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
 import { REACT_APP_API_URL } from "@env";
 import TagsInput from "../components/TagsInput";
+import MapView from "react-native-maps";
 
 const ModalScreen = () => {
   const tw = useTailwind();
@@ -23,9 +25,11 @@ const ModalScreen = () => {
   const [age, setAge] = useState(null);
   const [biography, setBiography] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState(null);
+  const [location, setLocation] = useState(null);
+  const [mapOpen, setMapOpen] = useState(false);
 
   const incompleteForm =
-    !image || !age || !biography || !phoneNumber || !skills;
+    !image || !age || !biography || !phoneNumber || !skills || !location;
 
   const userProfileInfo = async () => {
     const response = await fetch(`${REACT_APP_API_URL}/getUser/${user.uid}`);
@@ -36,6 +40,7 @@ const ModalScreen = () => {
     setAge(data.data.age);
     setBiography(data.data.biography);
     setPhoneNumber(data.data.phoneNumber);
+    setLocation(data.data.geoLocation);
   };
   const updateUserProfile = () => {
     const response = fetch(
@@ -59,6 +64,7 @@ const ModalScreen = () => {
             skills: skills,
             age: age,
             phoneNumber: phoneNumber,
+            geoLocation: location,
           },
         }),
       }
@@ -131,18 +137,52 @@ const ModalScreen = () => {
           placeholder="How can people contact you"
         />
 
-        <TouchableOpacity
-          disabled={incompleteForm}
-          style={[
-            tw("w-64 p-3 rounded-xl absolute bottom-10 "),
-            incompleteForm ? tw("bg-gray-400") : tw("bg-[#ff8836]"),
-          ]}
-          onPress={updateUserProfile}
-        >
-          <Text style={tw("text-center text-white text-xl")}>
-            Update Profile
-          </Text>
-        </TouchableOpacity>
+        <Text style={tw("text-center p-4 font-bold text-[#ff8836]")}>
+          Step 6: Location
+        </Text>
+        {mapOpen ? (
+          <>
+            <MapView
+              style={tw("h-full w-full absolute")}
+              onRegionChange={(region) => setLocation(region)}
+              initialRegion={location}
+            />
+            <View style={tw("absolute top-0 bottom-0 justify-center")}>
+              <Text style={tw("font-bold")}>X</Text>
+            </View>
+          </>
+        ) : (
+          <Button
+            title="Open Maps!"
+            color="black"
+            onPress={() => setMapOpen(true)}
+          />
+        )}
+
+        {!mapOpen ? null : (
+          <TouchableOpacity
+            style={tw("w-64 p-3 rounded-xl absolute bottom-10 bg-[#ff8836]")}
+            onPress={() => setMapOpen(false)}
+          >
+            <Text style={tw("text-center text-white text-xl")}>
+              Select Region!
+            </Text>
+          </TouchableOpacity>
+        )}
+        {mapOpen ? null : (
+          <TouchableOpacity
+            disabled={incompleteForm}
+            style={[
+              tw("w-64 p-3 rounded-xl absolute bottom-10 "),
+              incompleteForm ? tw("bg-gray-400") : tw("bg-[#ff8836]"),
+            ]}
+            onPress={updateUserProfile}
+          >
+            <Text style={tw("text-center text-white text-xl")}>
+              Update Profile
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
     </TouchableWithoutFeedback>
   );
