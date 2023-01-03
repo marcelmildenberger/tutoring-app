@@ -166,7 +166,7 @@ const HomeScreen = () => {
                 >
                   <View style={tw("flex-row justify-between ")}>
                     <Text style={tw("text-xl font-bold")}>
-                      {card.displayName}
+                      {card.displayName.split(" ")[0]}
                     </Text>
                     <Text style={tw("text-2xl font-bold")}>{card.age}</Text>
                   </View>
