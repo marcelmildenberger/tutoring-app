@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   FlatList,
+  TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
@@ -26,6 +27,9 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../firebase";
+import { Entypo } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import CalendarMessage from "../components/CalendarMessage";
 
 const MessageScreen = () => {
   const { user } = useAuth();
@@ -34,6 +38,7 @@ const MessageScreen = () => {
   const { matchDetails } = params;
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
+  const navigation = useNavigation();
   useEffect(
     () =>
       onSnapshot(
@@ -52,11 +57,15 @@ const MessageScreen = () => {
     [matchDetails, db]
   );
   const sendMessage = () => {
+    if (input.length === 0) {
+      return;
+    }
     addDoc(collection(db, "matches", matchDetails.id, "messages"), {
       timestamp: serverTimestamp(),
       userId: user.uid,
       displayName: user.displayName,
       photoURL: matchDetails.users[user.uid].photoURL,
+      messageType: "message",
       message: input,
     });
 
@@ -82,13 +91,22 @@ const MessageScreen = () => {
             data={messages}
             style={tw("pl-4")}
             keyExtractor={(item) => item.id}
-            renderItem={({ item: message }) =>
-              message.userId === user.uid ? (
-                <SenderMessage key={message.id} message={message} />
-              ) : (
-                <ReceiverMessage key={message.id} message={message} />
-              )
-            }
+            renderItem={({ item: message }) => {
+              if (message.messageType === "message") {
+                return message.userId === user.uid ? (
+                  <SenderMessage key={message.id} message={message} />
+                ) : (
+                  <ReceiverMessage key={message.id} message={message} />
+                );
+              } else if (message.messageType === "calendarEntry") {
+                return (
+                  <CalendarMessage
+                    key={message.id}
+                    event={message.calendarEvent}
+                  />
+                );
+              }
+            }}
             inverted={-1}
           />
         </TouchableWithoutFeedback>
@@ -97,14 +115,28 @@ const MessageScreen = () => {
             "flex-row justify-between items-center border-t  border-gray-200 px-5 py-2"
           )}
         >
-          <TextInput
-            style={tw("h-10 text-lg")}
-            placeholder="Send Message..."
-            onChangeText={setInput}
-            value={input}
-            onSubmitEditing={sendMessage}
-          />
-          <Button title="Send" color="#ff8836" onPress={sendMessage} />
+          <View style={{ maxWidth: "80%" }}>
+            <TextInput
+              style={tw("h-10 text-lg")}
+              placeholder="Send Message..."
+              onChangeText={setInput}
+              value={input}
+              onSubmitEditing={sendMessage}
+            />
+          </View>
+          <View style={tw("flex flex-row items-center mt-3 ml-2 ")}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Calendar", { matchDetails })}
+            >
+              <Entypo name="calendar" size={24} color="#ff8836" />
+            </TouchableOpacity>
+            <Button
+              title="Send"
+              style={tw("ml-4")}
+              color="#ff8836"
+              onPress={sendMessage}
+            />
+          </View>
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>

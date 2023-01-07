@@ -11,11 +11,13 @@
     "dev:tailwind": "concurrently \"tailwindcss --input input.css --output tailwind.css --no-autoprefixer --watch\" \"tailwind-rn --watch\""
   },
   "dependencies": {
+    "@react-native-community/datetimepicker": "^6.7.1",
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/native-stack": "^6.9.1",
     "expo": "~47.0.5",
     "expo-application": "~5.0.1",
     "expo-auth-session": "~3.7.2",
+    "expo-calendar": "^11.0.1",
     "expo-random": "~13.0.0",
     "expo-status-bar": "~1.4.2",
     "firebase": "^9.14.0",

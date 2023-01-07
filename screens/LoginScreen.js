@@ -3,11 +3,46 @@ import React, { useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
 import { useTailwind } from "tailwind-rn";
+import * as Calendar from "expo-calendar";
 
 const LoginScreen = () => {
   const { signInWithGoogle, loading } = useAuth();
   const navigation = useNavigation();
   const tw = useTailwind();
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await Calendar.requestCalendarPermissionsAsync();
+      if (status === "granted") {
+        var calendarExists = false;
+        const calendars = await Calendar.getCalendarsAsync(
+          Calendar.EntityTypes.EVENT
+        );
+        calendars.map((item) => {
+          if (item.title === "SucSEED") {
+            calendarExists = true;
+          }
+          return;
+        });
+        if (!calendarExists) {
+          const defaultCalendarSource =
+            Platform.OS === "ios"
+              ? await getDefaultCalendarSource()
+              : { isLocalAccount: true, name: "SucSEED" };
+          await Calendar.createCalendarAsync({
+            title: "SucSEED",
+            color: "#ff8836",
+            entityType: Calendar.EntityTypes.EVENT,
+            sourceId: defaultCalendarSource.id,
+            source: defaultCalendarSource,
+            name: "SucSEED",
+            ownerAccount: "personal",
+            accessLevel: Calendar.CalendarAccessLevel.OWNER,
+          });
+        }
+      }
+    })();
+  }, []);
   return (
     <View style={tw("flex-1")}>
       <ImageBackground

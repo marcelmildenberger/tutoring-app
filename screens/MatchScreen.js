@@ -28,7 +28,7 @@ const MatchScreen = () => {
             source={require("../images/Match_Screen.png")}
           />
         </View>
-        <Text style={tw("text-black text-center mt-5 text-lg")}>
+        <Text style={tw("text-black text-center mt-5 text-lg ml-2")}>
           You and {userSwiped.displayName} have liked each other.
         </Text>
 
@@ -48,7 +48,6 @@ const MatchScreen = () => {
         >
           <Text
             onPress={() => {
-              navigation.goBack();
               navigation.navigate("Chat");
             }}
             style={tw("text-center")}
