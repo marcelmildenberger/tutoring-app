@@ -23,7 +23,7 @@ const LoginScreen = () => {
             calendarExists = true;
           }
           return;
-        });
+        }); 
         if (!calendarExists) {
           const defaultCalendarSource =
             Platform.OS === "ios"
@@ -43,6 +43,12 @@ const LoginScreen = () => {
       }
     })();
   }, []);
+
+  async function getDefaultCalendarSource() {
+    const defaultCalendar = await Calendar.getDefaultCalendarAsync();
+    return defaultCalendar.source;
+  }
+
   return (
     <View style={tw("flex-1")}>
       <ImageBackground
